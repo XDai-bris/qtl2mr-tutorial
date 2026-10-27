@@ -43,9 +43,7 @@ You can also open `docs/index.html` from the downloaded folder. Paste the code i
 
 The timetable includes the introduction and closing. Expanded mathematics, the glossary and *After the workshop* are for self-study; they are not extra live lectures. The 120 minutes are a teaching budget, not measured participant completion time.
 
-The main workflow estimates founder effects on X and Y at each selected locus, then fits a common multiplier between those patterns. That multiplier is the MR estimate; departures contribute to Q. Random segregation motivates MR, but kinship adjustment does not automatically remove all confounding or establish instrument validity.
-
-SF reports relative X/Y associations without automatically changing the primary IV set. We retain the five-IV Reverse analysis and explicitly specify Chr10 and Chr11 for a separate sensitivity analysis. Case A illustrates a deliberately constructed observational–MR contrast and three separate univariable fits; it is not a validation experiment. Case B shows how similar slopes can conceal different founder-pattern compatibility. Q and SF guide investigation, not certification of causal direction or IV validity.
+Learn how to choose QTL instruments, run founder-based MR, and interpret direction and founder-pattern diagnostics. The tutorial then extends to three exposures and compares MR with observational associations.
 
 ## Before the workshop
 
@@ -84,6 +82,15 @@ The `library/` folder created by Task 01 belongs to this project only. For your 
 ## Tested on
 
 macOS on Apple silicon with R 4.5.3 and R 4.6.1. The same nine tasks also run automatically on GitHub, on Windows, macOS and Linux (R release, and R 4.1 on Linux), and their Console output is compared with `reference/console/`; the **replay** badge above shows the latest result. The last decimal place of some numbers may differ between computers.
+
+<details>
+<summary>Maintaining this tutorial</summary>
+
+This repository is the sole maintained source for the tutorial: edit `docs/index.html` here, keep its code aligned with `tasks/`, and keep its embedded figures identical to `reference/figures/`. The earlier v0.7 `build_guide.py` and its `repo/` staging copy are retired historical material; do not use them to regenerate or replace this guide. Any future builder must first reproduce the current guide without losing its content.
+
+Coordinate one editor at a time and hand over the commit and working-tree status before another editor starts. Keep qtl2mr 0.6.0, teaching data and numerical analysis results unchanged unless a separate update is explicitly agreed.
+
+</details>
 
 ## Licence
 

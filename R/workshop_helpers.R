@@ -78,8 +78,9 @@ plot_regional_selection <- function(marker_map,scan,peaks) {
     label_y<-max(a$lod)*c(.35,.47)[seq_len(nrow(extra))]
     segments(extra$pos,extra$lod+.4,extra$pos,label_y-.6,col="#ad6329")
     text(extra$pos,label_y,extra$marker,cex=.72,col="#ad6329")
-    legend("topright",c("LOD = 3","One peak per island"),
-           lty=c(2,NA),pch=c(NA,18),col=c("#bd693a","#087f8c"),bty="n",cex=.75)
+    legend("topright",c("LOD = 3","Peak in highlighted island","Peaks in other islands"),
+           lty=c(2,NA,NA),pch=c(NA,18,18),
+           col=c("#bd693a","#087f8c","#ad6329"),bty="n",cex=.75)
   },height=1100)
 }
 plot_marginal_strength <- function(instruments) {
