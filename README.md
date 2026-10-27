@@ -27,17 +27,25 @@ You can also open `docs/index.html` from the downloaded folder. Paste the code i
 
 | Task | What you do | Minutes |
 |---|---|---|
+| — | Why MR in mice? How the guide works | 5 |
 | 01 | Check the installation and the built-in example | 5 |
 | 02 | Meet one X–Y pair: 400 mice, founder probabilities, kinship | 10 |
 | 03 | Choose instruments: regional peaks, then a founder-strength (F) check | 15 |
 | 04 | Run MR on the Forward data and read its diagnostics | 20 |
 | 05 | Repeat on the Reverse data, where the true X → Y effect is zero | 5 |
-| 06 | Steiger filtering (SF), partial R², and a manually chosen instrument set | 15 |
+| 06 | Steiger direction diagnostic (SF), partial R², and a manual sensitivity IV set | 15 |
 | 07 | Case A: three exposures in one batch, compared with observational slopes | 15 |
 | 08 | Case B: why the founder pattern matters | 15 |
-| 09 | Save and find your results | 5 |
-| | Questions, discussion and catching up | 15 |
+| 09 | Save results and locate an estimate and Q | 3 |
+| — | Take-home discussion | 2 |
+| | Questions and recovery | 10 |
 | | **Total** | **120** |
+
+The timetable includes the introduction and closing. Expanded mathematics, the glossary and *After the workshop* are for self-study; they are not extra live lectures. The 120 minutes are a teaching budget, not measured participant completion time.
+
+The main workflow estimates founder effects on X and Y at each selected locus, then fits a common multiplier between those patterns. That multiplier is the MR estimate; departures contribute to Q. Random segregation motivates MR, but kinship adjustment does not automatically remove all confounding or establish instrument validity.
+
+SF reports relative X/Y associations without automatically changing the primary IV set. We retain the five-IV Reverse analysis and explicitly specify Chr10 and Chr11 for a separate sensitivity analysis. Case A illustrates a deliberately constructed observational–MR contrast and three separate univariable fits; it is not a validation experiment. Case B shows how similar slopes can conceal different founder-pattern compatibility. Q and SF guide investigation, not certification of causal direction or IV validity.
 
 ## Before the workshop
 

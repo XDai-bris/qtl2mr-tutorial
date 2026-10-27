@@ -1,12 +1,16 @@
 # Workshop display helpers. Scientific calls remain visible in tasks/.
+founder_colours <- function() {
+  c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
+    "#0072B2", "#D55E00", "#CC79A7", "#333333")
+}
 plot_install_check <- function(example) {
   draw_workshop_figure("00_install_check.png",function() {
     p <- example$allele_probs[[1]][1:6,,1]
     par(mar=c(4,4,3,1))
-    barplot(t(p),col=hcl.colors(8,"Dark 3"),border=NA,ylim=c(0,1.2),
+    barplot(t(p),col=founder_colours(),border=NA,ylim=c(0,1.2),
             xlab="Mouse in the built-in package example",ylab="Founder allele probability",
             main="Installation check: the bundled example is readable")
-    legend("top",legend=colnames(p),fill=hcl.colors(8,"Dark 3"),ncol=8,bty="n",cex=.8)
+    legend("top",legend=colnames(p),fill=founder_colours(),ncol=8,bty="n",cex=.8)
   })
 }
 plot_single_pair_inputs <- function(demo) {
@@ -14,14 +18,23 @@ plot_single_pair_inputs <- function(demo) {
   stopifnot(length(ids)==400,identical(ids,rownames(demo$Reverse)),
             identical(ids,rownames(demo$covar)),identical(ids,rownames(demo$kinship)))
   draw_workshop_figure("01_single_pair_inputs.png",function() {
-    par(mfrow=c(1,2),mar=c(4,4,3,1))
+    layout(matrix(1:3,nrow=1),widths=c(1,1,.18))
+    par(cex=1,mar=c(5,4,3,1))
     p <- demo$allele_probs[[1]][1:10,,40]
-    barplot(t(p),col=hcl.colors(8,"Dark 3"),border=NA,ylim=c(0,1.22),
+    barplot(t(p),col=founder_colours(),border=NA,ylim=c(0,1.22),
             xlab="Mouse (first ten)",ylab="Founder allele probability",main="One locus, eight founders")
-    legend("top",legend=colnames(p),fill=hcl.colors(8,"Dark 3"),ncol=4,bty="n",cex=.75)
-    image(1:20,1:20,demo$kinship[1:20,1:20],col=hcl.colors(50,"YlGnBu"),
+    legend("top",legend=colnames(p),fill=founder_colours(),ncol=4,bty="n",cex=.75)
+    par(mar=c(5,4,3,1))
+    colours<-hcl.colors(64,"YlGnBu");limits<-c(-.1,.5)
+    image(1:20,1:20,demo$kinship[1:20,1:20],col=colours,zlim=limits,
           xlab="Mouse",ylab="Mouse",main="Kinship K (first 20 mice)")
-  })
+    par(mar=c(5,0,3,3))
+    values<-seq(limits[1],limits[2],length.out=64)
+    image(1,values,matrix(values,nrow=1),col=colours,zlim=limits,
+          axes=FALSE,xlab="",ylab="")
+    axis(4,at=c(-.1,0,.25,.5),las=1,cex.axis=.8);box()
+    mtext("K",side=3,line=1)
+  },width=1800)
 }
 regional_islands <- function(marker_map,scan,threshold=3) {
   z <- marker_map;z$lod <- as.numeric(scan[z$marker,1]);out<-list()
@@ -56,6 +69,17 @@ plot_regional_selection <- function(marker_map,scan,peaks) {
     lines(a$pos,a$lod,col="#486575");points(a$pos,a$lod,pch=16,cex=.5,col="#486575")
     abline(h=3,lty=2,col="#bd693a");points(zoom$pos,zoom$lod,pch=18,col="#087f8c",cex=1.5)
     text(zoom$pos,zoom$lod,zoom$marker,pos=3,cex=.8)
+    extra<-regions[regions$chr==first_chr & regions$marker!=zoom$marker,]
+    for(i in seq_len(nrow(extra))) {
+      rect(extra$start[i]-.5,0,extra$end[i]+.5,3,
+           col=adjustcolor("#c87936",alpha.f=.2),border=NA)
+    }
+    points(extra$pos,extra$lod,pch=18,col="#ad6329",cex=1.3)
+    label_y<-max(a$lod)*c(.35,.47)[seq_len(nrow(extra))]
+    segments(extra$pos,extra$lod+.4,extra$pos,label_y-.6,col="#ad6329")
+    text(extra$pos,label_y,extra$marker,cex=.72,col="#ad6329")
+    legend("topright",c("LOD = 3","One peak per island"),
+           lty=c(2,NA),pch=c(NA,18),col=c("#bd693a","#087f8c"),bty="n",cex=.75)
   },height=1100)
 }
 plot_marginal_strength <- function(instruments) {
