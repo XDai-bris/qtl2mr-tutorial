@@ -83,15 +83,6 @@ The `library/` folder created by Task 01 belongs to this project only. For your 
 
 macOS on Apple silicon with R 4.5.3 and R 4.6.1. The same nine tasks also run automatically on GitHub, on Windows, macOS and Linux (R release, and R 4.1 on Linux), and their Console output is compared with `reference/console/`; the **replay** badge above shows the latest result. The last decimal place of some numbers may differ between computers.
 
-<details>
-<summary>Maintaining this tutorial</summary>
-
-This repository is the sole maintained source for the tutorial: edit `docs/index.html` here, keep its code aligned with `tasks/`, and keep its embedded figures identical to `reference/figures/`. The earlier v0.7 `build_guide.py` and its `repo/` staging copy are retired historical material; do not use them to regenerate or replace this guide. Any future builder must first reproduce the current guide without losing its content.
-
-Coordinate one editor at a time and hand over the commit and working-tree status before another editor starts. Keep qtl2mr 0.6.0, teaching data and numerical analysis results unchanged unless a separate update is explicitly agreed.
-
-</details>
-
 ## Licence
 
 - **Code** (R scripts, RStudio project, the scripts in `.github/`) is licensed under [GPL-3](LICENSE), the same licence as qtl2mr.
