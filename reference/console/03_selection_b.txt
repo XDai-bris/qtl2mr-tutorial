@@ -1,0 +1,14 @@
+
+TASK 03B | Apply the prespecified marginal F threshold
+     marker    lod F_X_block selected drop_reason
+ chr01_m040 19.076    13.613     TRUE            
+ chr03_m040 18.201    12.921     TRUE            
+ chr02_m040 14.256     9.886     TRUE            
+ chr06_m040  5.564     3.667    FALSE           F
+ chr08_m041  5.374     3.537    FALSE           F
+ chr13_m020  5.301     3.488    FALSE           F
+ chr01_m068   4.97     3.264    FALSE           F
+ chr05_m045  4.819     3.162    FALSE           F
+Retained: 3 | Rejected by F: 34 
+Figure saved: figures/03_marginal_F.png 
+Milestone 3: regional peaks and the marginal F gate have produced the IV set.

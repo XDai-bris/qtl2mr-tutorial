@@ -1,0 +1,53 @@
+# Runs the nine workshop tasks as a learner would, on Windows, macOS and Linux,
+# and checks that the Console output matches reference/console/.
+name: replay
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    name: ${{ matrix.os }} / R ${{ matrix.r }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, r: release }
+          - { os: windows-latest, r: release }
+          - { os: macos-latest, r: release }
+          - { os: ubuntu-latest, r: '4.1' }
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.r }}
+          use-public-rspm: true
+
+      # On Linux, Task 01 builds the fs package from source; fs needs libuv.
+      - name: Install libuv for fs (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libuv1-dev
+
+      - name: Run Tasks 01-09 from the repository root
+        run: Rscript .github/scripts/replay.R replay-console
+
+      - name: Compare the Console output with reference/console
+        run: Rscript .github/scripts/compare_console.R replay-console reference
+
+      - name: Keep the replay output when something differs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replay-${{ matrix.os }}-R${{ matrix.r }}
+          path: |
+            replay-console/
+            results/

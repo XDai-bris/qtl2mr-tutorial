@@ -1,0 +1,7 @@
+source("R/install.R")
+source("R/setup.R")
+data("qtl2mr_example", package="qtl2mr")
+validate_qtl2mr_input(qtl2mr_example)
+cat("Built-in example validated: TRUE\n")
+plot_install_check(qtl2mr_example)
+cat("Milestone 1: qtl2mr 0.6.0 is loaded and the example plot is visible.\n")

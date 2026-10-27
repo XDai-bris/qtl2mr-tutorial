@@ -1,0 +1,5 @@
+
+TASK 04A | Run Forward MR
+ exposure outcome n_loci estimate ci_lower ci_upper
+        x       y      3     0.88    0.765    0.994
+Figure saved: figures/04_forward_mr.png 

@@ -1,0 +1,7 @@
+
+TASK 08 | Case B: why founder patterns matter
+      pattern estimate lower upper         Q    Q_p
+ Proportional      0.5 0.451  0.55 9.361e-30      1
+   Discordant    0.515 0.464 0.567   104.931 <0.001
+Figure saved: figures/09_founder_patterns.png 
+Milestone 8: similar slopes can hide very different founder-pattern compatibility.

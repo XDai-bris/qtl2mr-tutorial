@@ -1,0 +1,7 @@
+
+TASK 05 | Repeat the workflow under Reverse
+Candidate peaks: 51 | Retained: 5 
+ estimate lower upper       Q    Q_p      warning
+    0.843 0.726 1.017 188.196 <0.001 hsq_boundary
+Figure saved: figures/06_forward_reverse_mr.png 
+Milestone 5: Reverse also gives an MR estimate; its high Q needs explanation.

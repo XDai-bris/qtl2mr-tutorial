@@ -1,0 +1,3 @@
+"analysis","n_IV","MR","CI_lower","CI_upper","Q","Q_df","Q_per_df","Q_p","warning","confidence_set","primary_reliable","inference_status"
+"All five IVs",5,0.84318769463497,0.725619313164662,1.01726610398037,188.196414457939,34,5.53518866052762,2.95247161431212e-23,"hsq_boundary","bounded",TRUE,"not_calibrated"
+"Manual Chr10 + Chr11",2,0.156654100207323,-0.0253721708421614,0.293463644718034,18.541982319738,13,1.42630633228754,0.138003509796542,"hsq_boundary","bounded",TRUE,"not_calibrated"

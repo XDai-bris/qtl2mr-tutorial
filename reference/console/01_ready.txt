@@ -1,0 +1,7 @@
+TASK 01 | Get ready
+Installing the supplied qtl2mr 0.6.0 archive...
+qtl2mr version: 0.6.0 
+Workshop project ready. Figures appear in Plots and are also saved.
+Built-in example validated: TRUE
+Figure saved: figures/00_install_check.png 
+Milestone 1: qtl2mr 0.6.0 is loaded and the example plot is visible.

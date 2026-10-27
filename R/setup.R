@@ -1,0 +1,10 @@
+# Loads the workshop display helpers and starts a new results/run_... folder.
+stopifnot(as.character(packageVersion("qtl2mr"))=="0.6.0")
+source("R/display.R")
+source("R/workshop_helpers.R")
+options(width=100)
+dir.create("results",showWarnings=FALSE)
+run_dir <- tempfile("run_",tmpdir="results")
+dir.create(run_dir)
+dir.create(file.path(run_dir,"figures"))
+cat("Workshop project ready. Figures appear in Plots and are also saved.\n")

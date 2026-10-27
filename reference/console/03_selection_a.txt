@@ -1,0 +1,13 @@
+
+TASK 03A | Many markers, one peak per region
+Markers scanned: 1520 | Candidate peaks: 37 
+     marker chr pos    lod
+ chr01_m040   1  40 19.076
+ chr03_m040   3  40 18.201
+ chr02_m040   2  40 14.256
+ chr06_m040   6  40  5.564
+ chr08_m041   8  41  5.374
+ chr13_m020  13  20  5.301
+Zoom: 31 markers in the shaded island -> chr01_m040 
+Figure saved: figures/02_regional_peaks.png 
+Checkpoint: identify the highest marker in the shaded region.

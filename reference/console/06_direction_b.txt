@@ -1,0 +1,15 @@
+
+TASK 06B | Compare the original five IVs with a manual two-IV set
+     marker chr F_X_block
+ chr10_m040  10      8.23
+ chr11_m040  11     7.251
+             analysis n_IV    MR CI_lower CI_upper       Q Q_df Q_per_df    Q_p
+         All five IVs    5 0.843    0.726    1.017 188.196   34    5.535 <0.001
+ Manual Chr10 + Chr11    2 0.157   -0.025    0.293  18.542   13    1.426  0.138
+             analysis      warning inference_status
+         All five IVs hsq_boundary   not_calibrated
+ Manual Chr10 + Chr11 hsq_boundary   not_calibrated
+Figure saved: figures/07b_manual_iv_comparison.png 
+Original five-IV analysis : supplied IV set unchanged = TRUE; retained = 5 ; automatic SF subset refit = FALSE
+Manual two-IV sensitivity : supplied IV set unchanged = TRUE; retained = 2 ; automatic SF subset refit = FALSE
+Milestone 6: the primary fit keeps 5 IVs; the separate manual fit uses 2.

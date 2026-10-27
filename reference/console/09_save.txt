@@ -1,0 +1,15 @@
+
+TASK 09 | Save and find your results
+                       file saved
+       direction_report.csv  TRUE
+   manual_iv_comparison.csv  TRUE
+        three_exposures.csv  TRUE
+       founder_patterns.csv  TRUE
+            sessionInfo.txt  TRUE
+       workshop_results.rds  TRUE
+        forward/report.html  TRUE
+        reverse/report.html  TRUE
+ reverse_manual/report.html  TRUE
+Figure saved: figures/10_take_home.png 
+Milestone 9: tables, figures, session information and three native reports are saved.
+Finished. Output folder: results/run_1248eee03c0c 

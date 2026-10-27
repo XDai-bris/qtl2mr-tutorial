@@ -1,0 +1,14 @@
+
+TASK 06A | SF compares associations; it does not remove IVs
+ scenario     marker    F_X  R2_X  R2_Y  direction_report
+  Forward chr01_m040 13.613 0.197 0.089 Exposure-dominant
+  Forward chr03_m040 12.921 0.189 0.111 Exposure-dominant
+  Forward chr02_m040  9.886 0.151  0.09 Exposure-dominant
+  Reverse chr10_m040   8.23 0.129 0.039 Exposure-dominant
+  Reverse chr11_m040  7.251 0.116 0.015 Exposure-dominant
+  Reverse chr03_m040  6.969 0.112 0.179  Outcome-dominant
+  Reverse chr01_m038  5.608 0.092 0.183  Outcome-dominant
+  Reverse chr02_m040  5.301 0.087 0.191  Outcome-dominant
+     marker    F_X k residual_df  R2_X
+ chr01_m040 13.613 7         388 0.197
+Figure saved: figures/07a_SF_report.png 

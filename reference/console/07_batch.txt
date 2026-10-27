@@ -1,0 +1,16 @@
+
+TASK 07 | Case A: three exposures, one outcome
+ exposure outcome
+       x1     y_A
+       x2     y_A
+       x3     y_A
+ exposure status n_loci theta_reported reported_ci_lower reported_ci_upper
+       x1     ok     40         -0.275            -0.525             -0.03
+       x2     ok     40          0.302             0.114             0.495
+       x3     ok     40          0.035            -0.149              0.22
+ exposure observational obs_lower obs_upper structural_theta     MR MR_lower MR_upper
+       x1          0.05    -0.241     0.341            -0.25 -0.275   -0.525    -0.03
+       x2         -0.05    -0.259     0.159             0.25  0.302    0.114    0.495
+       x3          0.02    -0.189     0.229                0  0.035   -0.149     0.22
+Figure saved: figures/08_case_a_batch.png 
+Milestone 7: three separate univariable MR results, alongside observational estimates.

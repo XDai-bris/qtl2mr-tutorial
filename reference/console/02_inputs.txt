@@ -1,0 +1,20 @@
+
+TASK 02 | One genetic base, two possible directions
+Mice: 400 | Markers: 1520 
+  mouse_id      x      y
+ mouse_001 -2.147 -1.043
+ mouse_002  0.113  0.433
+ mouse_003 -0.475  1.547
+ mouse_004 -0.662  -1.22
+  mouse_id batchB2 batchB3 batchB4    age
+ mouse_001       0       0       0 -1.306
+ mouse_002       1       0       0  1.115
+ mouse_003       0       1       0 -0.365
+ mouse_004       0       0       1 -1.181
+     marker chr pos
+ chr01_m001   1   1
+ chr01_m002   1   2
+ chr01_m003   1   3
+ chr01_m004   1   4
+Figure saved: figures/01_single_pair_inputs.png 
+Milestone 2: 400 mice loaded; both possible directions use the same genetic base.

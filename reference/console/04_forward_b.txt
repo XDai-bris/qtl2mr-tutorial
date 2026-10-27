@@ -1,0 +1,10 @@
+
+TASK 04B | Read diagnostics with the estimate
+ estimate lower upper      Q   Q_p warning
+     0.88 0.765 0.994 10.007 0.968    none
+     marker theta_minus_m profile_ci_lower profile_ci_upper
+ chr01_m040         0.919            0.774            1.064
+ chr03_m040         0.856            0.711            0.998
+ chr02_m040         0.867            0.732            1.001
+Figure saved: figures/05_forward_LOO.png 
+Milestone 4: I can read the estimate, interval, Q and leave-one-locus-out results.
