@@ -4,7 +4,9 @@
 # Rules for the Console text:
 #  * The random results-folder name (results/run_...) is ignored.
 #  * The line "Installing the fs dependency..." is ignored; it appears only when
-#    fs is not installed yet.
+#    fs is not installed yet. On Windows, installing the fs binary also prints
+#    "package 'fs' successfully unpacked and MD5 sums checked"; that line is
+#    ignored too.
 #  * Each line is split into tokens at white space, so column alignment does not
 #    matter. Lines must match one to one.
 #  * Text tokens must match exactly.
@@ -34,6 +36,7 @@ local({
     x <- sub("\r$", "", x)
     x <- gsub("results[\\\\/]+run_[0-9A-Fa-f]+", "results/run_<RUN>", x)
     x <- x[!grepl("^Installing the fs dependency", x)]
+    x <- x[!grepl("^package '[^']+' successfully unpacked and MD5 sums checked$", x)]
     # Trailing blank lines do not matter.
     while (length(x) && !nzchar(trimws(x[length(x)]))) x <- x[-length(x)]
     x
