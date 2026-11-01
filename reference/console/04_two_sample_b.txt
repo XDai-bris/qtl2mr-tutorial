@@ -1,0 +1,4 @@
+
+TASK 04B | X effects from Cohort A, Y effects from Cohort B
+ n_loci estimate lower upper interval
+      9     0.49 0.206 0.784  bounded

@@ -1,0 +1,14 @@
+
+TASK 03C | MR from Y to X in Cohort 1
+    marker chr  lod_Y   F_Y lod_X
+ chr18_035  18 12.086  8.36 2.179
+ chr12_024  12   9.56 6.515 1.173
+  chr3_035   3  9.205  6.26 0.961
+  chr4_088   4  7.218 4.853 1.527
+  chr8_048   8  6.669 4.469 0.322
+               question estimate  lower upper truth
+ Observational (Y on X)    0.962  0.747 1.176    NA
+              MR X -> Y     0.48  0.255 0.693   0.5
+              MR Y -> X    0.012 -0.053 0.069     0
+Figure saved: figures/03_summary_estimates.png 
+Milestone 3: the association (slope about 1) is not the causal effect (0.5); MR recovers the arrow.

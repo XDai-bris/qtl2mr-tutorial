@@ -1,4 +1,4 @@
-# Run the nine workshop tasks the way a learner does: from the repository root,
+# Run the five workshop tasks the way a learner does: from the repository root,
 # in one fresh R session, one code block after another, in order.
 # The Console text of each block is saved as <out_dir>/<task>.txt (or
 # <task>_a.txt and <task>_b.txt for tasks in two parts), with the same names as
@@ -40,5 +40,5 @@ local({
   }
   # The results folder name is random; record it so the figures can be checked.
   writeLines(get("run_dir", envir = .GlobalEnv), file.path(out_dir, "RUN_DIR.txt"))
-  cat("[replay] All nine tasks completed.\n")
+  cat("[replay] All five tasks completed.\n")
 })

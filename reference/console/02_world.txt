@@ -1,0 +1,21 @@
+
+TASK 02 | Meet the simulated world
+   cohort mice measured
+ Cohort 1  400  X and Y
+ Cohort A  400   X only
+ Cohort B  400   Y only
+Each cohort file holds: genoprobs, kinship, kinship_overall, pheno, map, scan 
+ mouse      X      Y
+ M0009 -1.144 -0.722
+ M0011  0.115 -0.673
+ M0012 -0.725  -1.33
+ M0013 -1.329 -1.748
+ M0015  -1.22 -2.944
+Markers: 1500 on 19 chromosomes
+   marker chr   pos
+ chr1_001   1  0.46
+ chr1_002   1 1.379
+ chr1_003   1 2.299
+Figure saved: figures/01_founder_probabilities.png 
+Figure saved: figures/02_kinship.png 
+Milestone 2: founder probabilities, kinship, traits and scans are loaded.

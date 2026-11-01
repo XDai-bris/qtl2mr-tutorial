@@ -1,0 +1,14 @@
+
+TASK 04A | Find X instruments in Cohort A
+    marker chr    pos    lod F_X_block
+  chr2_067   2     61 11.775      8.13
+ chr13_046  13 42.153 10.189      6.97
+ chr15_025  15 22.652 10.067     6.882
+ chr17_032  17 28.823  9.453     6.439
+  chr5_066   5 60.601  9.285     6.318
+  chr9_043   9 38.937  8.496     5.754
+  chr1_037   1 33.563  8.233     5.568
+  chr7_043   7 38.943  7.003     4.702
+ chr11_027  11 24.347  6.988     4.692
+Mice with both X and Y: 0 
+Figure saved: figures/04_miami.png 

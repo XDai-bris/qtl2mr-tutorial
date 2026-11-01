@@ -1,6 +1,6 @@
-# Run through tasks/01_ready.R, from the tutorial folder you downloaded or
-# cloned (open qtl2mr-tutorial.Rproj first), in a fresh R session.
 # Installs the bundled qtl2mr 0.6.0 into this project's private library/ folder.
+# Run it through tasks/01_ready.R, from the tutorial folder you downloaded or
+# cloned (open qtl2mr-tutorial.Rproj first), in a fresh R session.
 cat("TASK 01 | Get ready\n")
 archive <- "package/qtl2mr_0.6.0.tar.gz"
 if (!file.exists(archive)) stop("Open qtl2mr-tutorial.Rproj first, then try again.")

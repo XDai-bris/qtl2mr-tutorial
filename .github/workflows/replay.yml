@@ -1,4 +1,4 @@
-# Runs the nine workshop tasks as a learner would, on Windows, macOS and Linux,
+# Runs the five workshop tasks as a learner would, on Windows, macOS and Linux,
 # and checks that the Console output matches reference/console/.
 name: replay
 
@@ -37,7 +37,7 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libuv1-dev
 
-      - name: Run Tasks 01-09 from the repository root
+      - name: Run Tasks 01-05 from the repository root
         run: Rscript .github/scripts/replay.R replay-console
 
       - name: Compare the Console output with reference/console
