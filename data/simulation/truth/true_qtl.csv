@@ -1,0 +1,15 @@
+"id","trait","chr","frac","type","marker","pos"
+"QX1","X","1",0.35,"biallelic 1:7","chr1_037",33.5626
+"QX2","X","2",0.6,"biallelic 2:6","chr2_067",61.0003
+"QX3","X","4",0.25,"three-level","chr4_023",20.8014
+"QX4","X","5",0.7,"biallelic 3:5","chr5_066",60.6014
+"QX5","X","7",0.45,"eight-level","chr7_043",38.9434
+"QX6","X","9",0.55,"biallelic 4:4","chr9_043",38.9365
+"QX7","X","11",0.3,"two private alleles","chr11_027",24.3469
+"QX8","X","13",0.65,"five-level","chr13_046",42.1525
+"QX9","X","15",0.4,"biallelic 3:5","chr15_025",22.6525
+"QX10","X","17",0.5,"irregular","chr17_032",28.8225
+"QY1","Y","3",0.4,"biallelic 1:7","chr3_035",31.6237
+"QY2","Y","8",0.6,"three-level","chr8_048",43.9138
+"QY3","Y","12",0.35,"biallelic 4:4","chr12_024",21.7197
+"QY4","Y","18",0.55,"four-level","chr18_035",31.5341

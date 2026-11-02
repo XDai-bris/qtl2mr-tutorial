@@ -1,0 +1,3 @@
+"attempt","seed","C1_founder_freq_min","C1_founder_freq_max","C1_min_copies","C2_xqtl_found_cohort1","C2_xqtl_found_cohortA","C3_slope_cohort1","C4_yqtl_found_cohort1","info_x_selected_cohort1","info_x_chance_cohort1","info_x_selected_cohortA","info_x_chance_cohortA","info_y_selected_cohort1","info_y_chance_cohort1","C1","C2","C3","C4","pass"
+0,202611025,0.118371041666667,0.130914166666667,16,9,10,0.872518763762967,4,9,0,11,1,4,0,FALSE,TRUE,TRUE,TRUE,FALSE
+1,202611026,0.116945833333333,0.14190875,29,8,10,0.874988706222887,4,9,1,11,1,5,1,TRUE,TRUE,TRUE,TRUE,TRUE

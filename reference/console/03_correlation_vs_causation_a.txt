@@ -1,5 +1,5 @@
 
 TASK 03A | Cohort 1: how much does Y change with X?
  slope lower upper
- 0.962 0.747 1.176
+ 0.875 0.666 1.084
 The true causal effect is 0.5. The hidden U also moves X and Y together.

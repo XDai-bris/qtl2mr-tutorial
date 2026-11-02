@@ -23,17 +23,58 @@ draw_workshop_figure <- function(filename, draw, width = 1600, height = 900) {
   invisible(filename)
 }
 
-plot_founder_bars <- function(cohort, marker, n = 6) {
-  chr <- cohort$map$chr[cohort$map$marker == marker]
-  p <- cohort$genoprobs[[chr]][seq_len(n), , marker]
-  draw_workshop_figure("01_founder_probabilities.png", function() {
-    big_text(mar = c(5, 5, 4, 1))
-    barplot(t(p), col = founder_colours(), border = "white", ylim = c(0, 1.3), axes = FALSE,
-            names.arg = rownames(p), xlab = "Mouse", ylab = "Founder probability",
-            main = paste0("Each mouse carries two founder haplotypes (marker ", marker, ")"))
-    axis(2, at = seq(0, 1, by = 0.2), las = 1)  # probabilities: the axis stops at 1
-    legend("top", legend = names(founder_colours()), fill = founder_colours(),
-           ncol = 8, bty = "n", cex = 1.2, border = "white")
+# For one mouse, split the founder probabilities along a chromosome (founders x
+# markers, exactly 0, 1/2 or 1 here) into two chromosome copies. At each marker
+# the mouse carries two founders; each copy keeps the founder it had at the
+# previous marker whenever it can, so that long stretches stay together.
+founder_tracks <- function(p) {
+  founders <- rownames(p)
+  tracks <- matrix(NA_character_, 2, ncol(p))
+  for (j in seq_len(ncol(p))) {
+    o <- order(p[, j], decreasing = TRUE)
+    pair <- if (p[o[1], j] > 0.75) founders[o[c(1, 1)]] else founders[o[1:2]]
+    if (j > 1 && sum(rev(pair) == tracks[, j - 1]) > sum(pair == tracks[, j - 1])) {
+      pair <- rev(pair)
+    }
+    tracks[, j] <- pair
+  }
+  tracks
+}
+
+# Founder mosaic: two strips per mouse (its two copies of one chromosome),
+# coloured by the founder each stretch comes from; a dashed line marks a marker.
+plot_founder_mosaic <- function(cohort, chr, marker, n = 6) {
+  map <- cohort$map[cohort$map$chr == chr, ]
+  stopifnot(marker %in% map$marker)
+  pos <- map$pos
+  step <- diff(pos)
+  edges <- c(max(0, pos[1] - step[1] / 2), pos[-1] - step / 2, pos[length(pos)] + step[length(step)] / 2)
+  # n mice spread across the cohort, so that close relatives are unlikely.
+  rows <- round(seq(1, dim(cohort$genoprobs[[chr]])[1], length.out = n))
+  probs <- cohort$genoprobs[[chr]][rows, , map$marker, drop = FALSE]
+  at <- pos[map$marker == marker]
+  cols <- founder_colours()
+  draw_workshop_figure("01_founder_mosaic.png", function() {
+    big_text(mar = c(5, 7, 4, 1))
+    plot(NA, xlim = range(edges), ylim = c(0.45, n + 1.5), xaxs = "i", yaxt = "n", bty = "n",
+         xlab = paste0("Position on chromosome ", chr, " (cM)"), ylab = "",
+         main = "Each mouse is a mosaic of the eight founders")
+    for (i in seq_len(n)) {
+      tracks <- founder_tracks(probs[i, , ])
+      y <- n + 1 - i
+      for (k in 1:2) {
+        runs <- rle(tracks[k, ])
+        last <- cumsum(runs$lengths)
+        first <- c(1, last[-length(last)] + 1)
+        bottom <- if (k == 1) y + 0.02 else y - 0.34
+        rect(edges[first], bottom, edges[last + 1], bottom + 0.32, col = cols[runs$values], border = NA)
+      }
+    }
+    axis(2, at = n + 1 - seq_len(n), labels = dimnames(probs)[[1]], las = 1, tick = FALSE)
+    segments(at, 0.55, at, n + 0.45, lty = 2, lwd = 3, col = col_truth)
+    text(at, n + 0.75, marker, cex = 1.1, font = 2, col = col_truth)
+    legend("top", legend = names(cols), fill = cols, border = "white", horiz = TRUE,
+           bty = "n", cex = 1.1, x.intersp = 0.6)
   })
 }
 
@@ -96,7 +137,7 @@ plot_miami <- function(cohort_x, cohort_y, markers) {
   ly <- cohort_y$scan[map$marker, "Y"]
   top <- ceiling(max(lx, ly)) + 1
   draw_workshop_figure("04_miami.png", function() {
-    big_text(mar = c(5, 6, 4, 2))
+    big_text(mar = c(6.8, 6, 4, 2))
     plot(NA, xlim = range(g$x) + c(-5, 5), ylim = c(-top, top), xaxt = "n", yaxt = "n", xaxs = "i",
          xlab = "Chromosome", ylab = "LOD",
          main = "X instruments found in Cohort A, read off in Cohort B")
@@ -114,7 +155,9 @@ plot_miami <- function(cohort_x, cohort_y, markers) {
     abline(h = c(-3, 3), lty = 3, col = "grey50")
     abline(v = g$x[match(markers, map$marker)], lty = 2, lwd = 1.6, col = col_truth)
     axis(1, at = g$start + g$len / 2, labels = g$chrs, tick = FALSE, cex.axis = 1)
-    legend("topright", c("X instrument (from Cohort A)", "LOD = 3"), lty = c(2, 3),
+    # The legend sits below the plot, so that it covers no instrument line.
+    legend("bottom", inset = c(0, -0.3), xpd = NA, horiz = TRUE,
+           c("X instrument (from Cohort A)", "LOD = 3"), lty = c(2, 3),
            lwd = c(1.6, 1), col = c(col_truth, "grey50"), bty = "n", cex = 1.1)
   }, width = 2000)
 }
@@ -137,62 +180,4 @@ plot_mr_scatter <- function(pts, theta, truth = 0.5) {
     legend("topleft", c(sprintf("MR slope %.2f", theta), sprintf("truth %.1f", truth)),
            lty = c(1, 2), lwd = c(4, 3), col = c(col_xy, col_truth), bty = "n", cex = 1.2)
   })
-}
-
-plot_founder_scatter <- function(fe, theta, truth = 0.5) {
-  draw_workshop_figure("06_founder_scatter.png", function() {
-    big_text(mar = c(5, 5.5, 4, 2))
-    plot(fe$x, fe$y, pch = 21, bg = founder_colours()[fe$founder], col = "white", cex = 2,
-         las = 1, xlab = "Founder effect on X (Cohort A)", ylab = "Founder effect on Y (Cohort B)",
-         main = "Every founder at every instrument")
-    abline(h = 0, v = 0, col = "grey80")
-    abline(0, truth, lty = 2, lwd = 3, col = col_truth)
-    abline(0, theta, lwd = 4, col = col_xy)
-    legend("topleft", legend = names(founder_colours()), pt.bg = founder_colours(), pch = 21,
-           col = "white", ncol = 4, bty = "n", cex = 1.1, pt.cex = 1.8)
-  })
-}
-
-plot_founder_vs_snp <- function(fe, carriers, snp, marker) {
-  s <- as.numeric(fe$founder %in% carriers)
-  snp_line <- snp[["effect"]] * (s - mean(s))
-  draw_workshop_figure("07_founders_vs_snp.png", function() {
-    big_text(mar = c(5, 5.5, 4, 2))
-    x <- seq_len(nrow(fe))
-    lim <- range(c(fe$effect - 1.96 * fe$se, fe$effect + 1.96 * fe$se, snp_line))
-    plot(NA, xlim = c(0.5, nrow(fe) + 0.5), ylim = lim + c(0, diff(lim) * 0.15), xaxt = "n", las = 1,
-         xlab = "Founder", ylab = "Effect on X (Cohort A)",
-         main = paste("One QTL (", marker, "): 8 founder effects vs one SNP split", sep = ""))
-    axis(1, at = x, labels = fe$founder)
-    abline(h = 0, col = "grey80")
-    segments(x, fe$effect - 1.96 * fe$se, x, fe$effect + 1.96 * fe$se, lwd = 3,
-             col = founder_colours()[fe$founder])
-    points(x, fe$effect, pch = 21, bg = founder_colours()[fe$founder], col = "white", cex = 2.6)
-    segments(x - 0.35, snp_line, x + 0.35, snp_line, lwd = 5, col = "grey55")
-    legend("topright", c("Founder effect (95% interval)",
-                         paste0("SNP: carriers ", paste(carriers, collapse = ""), " vs the rest")),
-           pch = c(21, NA), pt.bg = c("grey30", NA), lty = c(NA, 1), lwd = c(NA, 5),
-           col = c("white", "grey55"), pt.cex = 2, bty = "n", cex = 1.1)
-  })
-}
-
-plot_founder_vs_snp_precision <- function(tab, share, truth = 0.5) {
-  draw_workshop_figure("08_founder_vs_snp_precision.png", function() {
-    layout(matrix(1:2, nrow = 1), widths = c(1, 1.15))
-    big_text(mar = c(5, 6.5, 4, 1))
-    y <- c(2, 1)
-    plot(NA, xlim = range(c(0, 1, tab$lower, tab$upper)), ylim = c(0.5, 2.6), yaxt = "n", ylab = "",
-         xlab = "Two-sample MR estimate", main = "Same mice, same instruments")
-    axis(2, at = y, labels = tab$method, las = 1, tick = FALSE)
-    segments(truth, 0.5, truth, 2.4, lty = 2, lwd = 3, col = col_truth)
-    text(truth, 2.52, paste("truth", truth), cex = 1.1, col = col_truth)
-    segments(tab$lower, y, tab$upper, y, lwd = 5, col = c(col_xy, "#E69F00"))
-    points(tab$estimate, y, pch = 19, cex = 2.2, col = c(col_xy, "#E69F00"))
-    text(tab$upper, y - 0.2, sprintf("width %.2f", tab$upper - tab$lower), adj = 1, cex = 1.1)
-    big_text(mar = c(5, 5, 4, 1))
-    barplot(share$share, names.arg = share$chr, ylim = c(0, 1.1), las = 1, border = "white",
-            col = "#E69F00", xlab = "Instrument (chromosome)",
-            ylab = "Share of the X association kept", main = "What the best single SNP keeps")
-    abline(h = 1, lty = 2, col = col_truth)
-  }, width = 2000)
 }
