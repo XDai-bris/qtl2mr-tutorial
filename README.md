@@ -5,7 +5,7 @@
 
 **CTC 2026 workshop · 45 minutes · hands-on in R**
 
-![Three estimates from simulated Cohort 1: the association of Y with X near 0.9, MR from X to Y near the true 0.5, and MR from Y to X near the true 0](reference/figures/03_summary_estimates.png)
+![Four estimates from simulated Cohort 1, in two groups: the association of Y with X near 0.9 and MR from X to Y near the true 0.5; the association of X with Y near 0.17 and MR from Y to X near the true 0](reference/figures/03_summary_estimates.png)
 
 *In simulated Diversity Outbred mice, the association between X and Y (top) is well above the true causal effect (0.875 against 0.5). Mendelian randomization recovers the effect of X on Y (middle) and finds no sign of an effect of Y on X (bottom). Dashed lines: the truth built into the simulation.*
 
@@ -33,7 +33,7 @@ The same guide is `docs/index.html` in the downloaded folder; it works offline. 
 | 1 Correlation is not causation | The association vs MR in both directions, in one cohort (Task 03) | 14 |
 | 2 Two-sample MR | X and Y measured in different mice (Task 04) | 12 |
 | 3 Built on qtl2's founder model | Your qtl2 objects are qtl2mr's inputs; a QTL is an eight-founder pattern, not two alleles (no code) | 8 |
-| Take-home | Three points, one per part | 4 |
+| Take-home | Three points, one per part, and further steps | 4 |
 | | **Total** | **45** |
 
 The presenter runs the code live; you are welcome to follow along. There is no in-class debugging, so please set up before the workshop.

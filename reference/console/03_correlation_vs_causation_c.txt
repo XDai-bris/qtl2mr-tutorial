@@ -9,6 +9,7 @@ TASK 03C | MR from Y to X in Cohort 1
                question estimate  lower upper truth
  Observational (Y on X)    0.875  0.666 1.084    NA
               MR X -> Y    0.416  0.151 0.664   0.5
+ Observational (X on Y)    0.166  0.126 0.206    NA
               MR Y -> X    0.051 -0.014 0.109     0
 Figure saved: figures/03_summary_estimates.png 
-Milestone 3: the association (slope well above 0.5) is not the causal effect (0.5); MR recovers the arrow.
+Milestone 3: the association is not the causal effect and shows no direction; MR recovers the arrow.

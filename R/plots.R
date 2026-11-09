@@ -101,21 +101,32 @@ plot_kinship <- function(cohort, n = 60) {
 }
 
 plot_summary <- function(est) {
+  # Rows 1-2 answer "does X affect Y?" and rows 3-4 "does Y affect X?". In each
+  # group the truth (the causal effect) is one dashed line across both rows.
   draw_workshop_figure("03_summary_estimates.png", function() {
     big_text(mar = c(5, 15, 4, 2))
-    y <- rev(seq_len(nrow(est)))
-    cols <- c(col_obs, col_xy, col_yx)
-    plot(NA, xlim = range(c(-0.2, 1.3, est$lower, est$upper)), ylim = c(0.4, nrow(est) + 0.6),
-         yaxt = "n", ylab = "", xlab = "Slope (outcome units per exposure unit)",
+    y <- c(5.2, 4.2, 2.2, 1.2)
+    group <- c(1, 1, 2, 2)
+    titles <- c("Does X affect Y?", "Does Y affect X?")
+    cols <- c(col_obs, col_xy, col_obs, col_yx)
+    xlim <- range(c(-0.2, 1.3, est$lower, est$upper))
+    plot(NA, xlim = xlim, ylim = c(0.6, 6.2), yaxt = "n", ylab = "",
+         xlab = "Slope (outcome units per exposure unit)",
          main = "Cohort 1: association vs causal effect")
     abline(v = 0, col = "grey80")
+    abline(h = 3.2, col = "grey60", lty = 3, lwd = 2)
     axis(2, at = y, labels = est$label, las = 1, tick = FALSE)
-    for (i in seq_len(nrow(est))) {
-      if (is.finite(est$truth[i])) {
-        segments(est$truth[i], y[i] - 0.38, est$truth[i], y[i] + 0.38,
-                 lty = 2, lwd = 3, col = col_truth)
-        text(est$truth[i], y[i] + 0.45, paste("truth", est$truth[i]), cex = 1.1, col = col_truth)
+    for (g in 1:2) {
+      rows <- which(group == g)
+      top <- max(y[rows])
+      text(xlim[2], top + 0.72, titles[g], adj = c(1, 0.5), font = 2, cex = 1.2)
+      truth <- est$truth[rows][is.finite(est$truth[rows])]
+      if (length(truth)) {
+        segments(truth, min(y[rows]) - 0.38, truth, top + 0.38, lty = 2, lwd = 3, col = col_truth)
+        text(truth, top + 0.6, paste("truth", truth), cex = 1.1, col = col_truth)
       }
+    }
+    for (i in seq_len(nrow(est))) {
       segments(est$lower[i], y[i], est$upper[i], y[i], lwd = 5, col = cols[i])
       points(est$estimate[i], y[i], pch = 19, cex = 2.2, col = cols[i])
     }
